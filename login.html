@@ -28,7 +28,7 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 450px;
-            padding: 40px 30px;
+            padding: 20px 30px;
             transition: all 0.3s ease;
             position: relative;
         }
@@ -64,7 +64,7 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 6px;
             position: relative;
         }
 
@@ -90,7 +90,7 @@
 
         .form-control {
             width: 100%;
-            padding: 15px 40px 15px 45px;
+            padding: 9px 40px 10px 45px;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 16px;
@@ -124,6 +124,96 @@
 
         .remember-me input {
             margin-right: 8px;
+        }
+
+        .captcha-section {
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        .captcha-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .captcha-code {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            padding: 0px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .captcha-code::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 5px,
+                rgba(255, 255, 255, 0.1) 5px,
+                rgba(255, 255, 255, 0.1) 10px
+            );
+            pointer-events: none;
+        }
+
+        .captcha-input-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .captcha-input {
+            width: 100%;
+            padding: 15px 20px 15px 0px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            letter-spacing: 3px;
+            font-family: 'Courier New', monospace;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+            height: 40px;
+        }
+
+        .captcha-input:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.2);
+            background-color: #fff;
+        }
+
+        .captcha-refresh {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+            z-index: 2;
+            background: none;
+            border: none;
+            font-size: 18px;
+        }
+
+        .captcha-refresh:hover {
+            color: #6a11cb;
         }
 
         .login-button {
@@ -280,6 +370,23 @@
                 padding: 30px 20px;
                 min-width: 180px;
             }
+            
+            .captcha-code {
+                font-size: 16px;
+                letter-spacing: 2px;
+                padding: 12px;
+                height: 48px;
+            }
+            
+            .captcha-input {
+                padding: 12px 40px 12px 12px;
+                font-size: 14px;
+                height: 48px;
+            }
+            
+            .captcha-group {
+                flex-direction: column;
+            }
         }
 
         /* Animasi untuk validasi form */
@@ -334,6 +441,20 @@
                 <div class="error-message" id="passwordError">Kata sandi harus minimal 6 karakter</div>
             </div>
             
+            <!-- CAPTCHA Section -->
+            <div class="captcha-section">
+                <div class="captcha-group">
+                    <div class="captcha-code" id="captchaCode">CAPTCHA</div>
+                    <div class="captcha-input-container">
+                        <input type="text" id="captchaInput" class="captcha-input" placeholder="Kode" maxlength="6">
+                        <button type="button" class="captcha-refresh" id="refreshCaptcha" title="Refresh CAPTCHA">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="error-message" id="captchaError">Kode CAPTCHA tidak valid</div>
+            </div>
+            
             <div class="remember-me">
                 <input type="checkbox" id="remember">
                 <label for="remember">Ingat saya</label>
@@ -365,6 +486,34 @@
             const usernameError = document.getElementById('usernameError');
             const passwordError = document.getElementById('passwordError');
             const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            // CAPTCHA Elements
+            const captchaCode = document.getElementById('captchaCode');
+            const captchaInput = document.getElementById('captchaInput');
+            const refreshCaptcha = document.getElementById('refreshCaptcha');
+            const captchaError = document.getElementById('captchaError');
+            
+            // Generate CAPTCHA
+            function generateCaptcha() {
+                const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+                let captcha = '';
+                for (let i = 0; i < 6; i++) {
+                    captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                captchaCode.textContent = captcha;
+                captchaInput.value = '';
+                captchaInput.classList.remove('error', 'success');
+                captchaError.style.display = 'none';
+                return captcha;
+            }
+            
+            // Initialize CAPTCHA
+            let currentCaptcha = generateCaptcha();
+            
+            // Refresh CAPTCHA
+            refreshCaptcha.addEventListener('click', function() {
+                currentCaptcha = generateCaptcha();
+            });
             
             // Toggle visibilitas password
             passwordToggle.addEventListener('click', function() {
@@ -410,6 +559,17 @@
                     passwordError.style.display = 'none';
                 }
                 
+                // Validasi CAPTCHA
+                if (captchaInput.value.toUpperCase() !== currentCaptcha.toUpperCase()) {
+                    captchaInput.classList.add('error');
+                    captchaError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    captchaInput.classList.remove('error');
+                    captchaInput.classList.add('success');
+                    captchaError.style.display = 'none';
+                }
+                
                 // Jika valid, simulasi proses login
                 if (isValid) {
                     // Nonaktifkan tombol
@@ -430,6 +590,10 @@
                         loginForm.reset();
                         usernameInput.classList.remove('success');
                         passwordInput.classList.remove('success');
+                        captchaInput.classList.remove('success');
+                        
+                        // Generate new CAPTCHA
+                        currentCaptcha = generateCaptcha();
                         
                         // Tampilkan pesan sukses (bisa diganti dengan redirect)
                         alert('Login berhasil! Selamat datang di Si-Tampu');
@@ -449,6 +613,13 @@
                 if (this.value.length >= 6) {
                     this.classList.remove('error');
                     passwordError.style.display = 'none';
+                }
+            });
+            
+            captchaInput.addEventListener('input', function() {
+                if (this.value.toUpperCase() === currentCaptcha.toUpperCase()) {
+                    this.classList.remove('error');
+                    captchaError.style.display = 'none';
                 }
             });
         });
