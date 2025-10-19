@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard WhatsApp Admin</title>
+  <style>
+    :root {
+      --bg1: #0f2027;
+      --bg2: #203a43;
+      --bg3: #2c5364;
+      --accent: #25D366;
+      --muted: #a0aec0;
+      --card-bg: rgba(255,255,255,0.05);
+      --text: #e6eef6;
+      --radius: 12px;
+      --shadow: 0 6px 22px rgba(0,0,0,0.45);
+      font-family: "Poppins", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      color: var(--text);
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), #128C7E);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #002028;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    p.lead {
+      margin: 4px 0 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    main {
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 26px rgba(0,0,0,0.6);
+    }
+
+    .avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #128C7E);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .meta {
+      flex: 1;
+    }
+
+    .meta h3 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .meta p {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #063f26;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 14px;
+      box-shadow: 0 6px 18px rgba(2, 38, 18, 0.35);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .wa-btn:hover {
+      background: #20bd5a;
+      transform: scale(1.05);
+    }
+
+    footer {
+      margin-top: 26px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .wa-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">DSH</div>
+      <div>
+        <h1>Dashboard Web Page</h1>
+        <p class="lead">Klik tombol untuk pengembangan</p>
+      </div>
+    </header>
+
+    <main>
+      <!-- Dev 1 -->
+      <article class="card">
+        <div class="avatar">D1</div>
+        <div class="meta">
+          <h3>Dev 1</h3>
+          <p>Projects: hal login<br>Deskripsi: -</p>
+        </div>
+        <a class="wa-btn" href="login.html"
+           target="_blank" rel="noopener noreferrer">⚙️ View Page</a>
+      </article>
+
+      <!-- Dev 2 -->
+      <article class="card">
+        <div class="avatar">D2</div>
+        <div class="meta">
+          <h3>Dev 2</h3>
+          <p>Projects: -<br>Deskripsi: -</p>
+        </div>
+        <a class="wa-btn" href="https://wa.me/6282234567890?text=Halo%20Admin%202%2C%20mohon%20bantu%20saya."
+           target="_blank" rel="noopener noreferrer">⚙️ View Page</a>
+      </article>
+
+      <!-- Dev 3 -->
+      <article class="card">
+        <div class="avatar">D3</div>
+        <div class="meta">
+          <h3>Dev 3</h3>
+          <p>Projects: -<br>Deskripsi: -</p>
+        </div>
+        <a class="wa-btn" href="https://wa.me/6283234567890?text=Halo%20Admin%203%2C%20saya%20perlu%20info."
+           target="_blank" rel="noopener noreferrer">⚙️ View Page</a>
+      </article>
+
+      <!-- Dev 4 -->
+      <article class="card">
+        <div class="avatar">D4</div>
+        <div class="meta">
+          <h3>Dev 4</h3>
+          <p>Projects: -<br>Deskripsi: -</p>
+        </div>
+        <a class="wa-btn" href="https://wa.me/6283234567890?text=Halo%20Admin%203%2C%20saya%20perlu%20info."
+           target="_blank" rel="noopener noreferrer">⚙️ View Page</a>
+      </article>
+
+      <!-- Dev 5 -->
+      <article class="card">
+        <div class="avatar">D5</div>
+        <div class="meta">
+          <h3>Dev 5</h3>
+          <p>Projects: -<br>Deskripsi: -</p>
+        </div>
+        <a class="wa-btn" href="https://wa.me/6283234567890?text=Halo%20Admin%203%2C%20saya%20perlu%20info."
+           target="_blank" rel="noopener noreferrer">⚙️ View Page</a>
+      </article>
+    </main>
+
+    <footer>
+      &copy; <span id="year"></span> Dashboard Web Page — Modern & Responsif
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
